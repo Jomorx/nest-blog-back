@@ -24,7 +24,7 @@ import { ISequelizeModule, ISequelizeModuleForFeature } from "./config/db"
     OSSModule.forRoot(config)
   ],
   controllers: Object.values(controllers),
-  providers: Object.values(services)
+  providers: [...Object.values(services)]
 })
 export class AppModule {
   configure(consumer: MiddlewareConsumer) {
