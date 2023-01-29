@@ -1,20 +1,33 @@
-import { Body, Controller, Get, Param, Post, Query } from "@nestjs/common"
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  Post,
+  Query,
+  UseGuards
+} from "@nestjs/common"
 import { PageDto } from "src/dto/pageDto"
 import { UpdateArticleDto } from "src/dto/updateArticleDto"
 import { UploadArticleDto } from "src/dto/uploadArticleDto"
+import { noLogin } from "src/guard/auth"
+import { AuthGuard } from "src/guard/authGuard"
 import { ArticleService } from "src/service/article.service"
 
 @Controller("article")
+@UseGuards(AuthGuard)
 export class ArticleController {
   constructor(private readonly articleService: ArticleService) {}
   //获取文章列表
   @Get("getArticleList")
+  @noLogin()
   async getArticleList(@Query() pageDto: PageDto) {
     console.log(pageDto)
     return this.articleService.getArticleList(pageDto)
   }
   //根据id获取文章
   @Get("getArticleById/:id")
+  @noLogin()
   async getArticleById(@Param("id") id) {
     return this.articleService.getArticleById(id)
   }

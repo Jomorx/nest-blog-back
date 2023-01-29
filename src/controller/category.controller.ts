@@ -1,11 +1,15 @@
-import { Body, Controller, Get, Post, Query } from "@nestjs/common"
+import { Body, Controller, Get, Post, Query, UseGuards } from "@nestjs/common"
 import { PageDto } from "src/dto/pageDto"
+import { noLogin } from "src/guard/auth"
+import { AuthGuard } from "src/guard/authGuard"
 import { CategoryService } from "src/service/category.service"
 
 @Controller("category")
+@UseGuards(AuthGuard)
 export class CategoryController {
   constructor(private readonly categoryService: CategoryService) {}
   @Get("getCategoryList")
+  @noLogin()
   async getCategoryList(@Query() pageDto: PageDto) {
     return await this.categoryService.getCategoryList(pageDto)
   }

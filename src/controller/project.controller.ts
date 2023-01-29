@@ -1,15 +1,28 @@
-import { Body, Controller, Get, Param, Post, Query } from "@nestjs/common"
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  Post,
+  Query,
+  UseGuards
+} from "@nestjs/common"
 import { PageDto } from "src/dto/pageDto"
+import { noLogin } from "src/guard/auth"
+import { AuthGuard } from "src/guard/authGuard"
 import { ProjectService } from "src/service/project.service"
 
 @Controller("project")
+@UseGuards(AuthGuard)
 export class ProjectController {
   constructor(private readonly projectService: ProjectService) {}
+  @noLogin()
   @Get("getProjectList")
   async getProjectList(@Query() pageDto: PageDto) {
     console.log(pageDto)
     return this.projectService.getProjectList(pageDto)
   }
+  @noLogin()
   @Get("getProjectById/:id")
   async getProjectById(@Param("id") id) {
     return this.projectService.getProjectById(id)

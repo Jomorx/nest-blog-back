@@ -1,11 +1,15 @@
-import { Body, Controller, Get, Param, Post, Query } from "@nestjs/common"
+import { Body, Controller, Get, UseGuards, Post, Query } from "@nestjs/common"
 import { PageDto } from "src/dto/pageDto"
+import { noLogin } from "src/guard/auth"
+import { AuthGuard } from "src/guard/authGuard"
 import { TagService } from "src/service/tag.service"
 
 @Controller("tag")
+@UseGuards(AuthGuard)
 export class TagController {
   constructor(private readonly tagService: TagService) {}
   @Get("getTagList")
+  @noLogin()
   async getTagList(@Query() PageDto: PageDto) {
     return await this.tagService.getTagList(PageDto)
   }
