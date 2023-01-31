@@ -15,11 +15,13 @@ const authDesc = {
         const { account, password } = new JwtService().verify(authorization, {
           secret: jwtConfig.secret
         })
+        //3. 通过校验
         return true
       } catch (e) {
         throw new AppException(403, "登录已过期")
       }
     }
+    //不需要登录的请求
     return true
   },
   isAdmin(reflector: Reflector, context: ExecutionContext) {

@@ -52,12 +52,16 @@ export class ArticleController {
     @Body("articleId") articleId: number,
     @Body("isTop") isTop: number
   ) {
-    console.log(articleId, isTop)
     return await this.articleService.switchIsTop(articleId, isTop)
   }
   //获取时间归档
   @Get("getArticleTimeLine")
   async getArticleTimeLine() {
     return this.articleService.getArticleTimeLine()
+  }
+  @noLogin()
+  @Get("viewArticle/:id")
+  async viewArticle(@Param("id") id: number) {
+    return this.articleService.viewArticle(id)
   }
 }

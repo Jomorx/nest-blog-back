@@ -125,4 +125,15 @@ export class ArticleService {
     }
     return success(data)
   }
+  async viewArticle(id: number) {
+    const Article = await this.articleModel.findOne({
+      where: { articleId: id },
+      attributes: ["viewCount"]
+    })
+    this.articleModel.update(
+      { viewCount: Article.viewCount + 1 },
+      { where: { articleId: id } }
+    )
+    return success(null, "访问成功")
+  }
 }
