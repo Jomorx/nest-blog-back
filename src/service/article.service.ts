@@ -108,6 +108,7 @@ export class ArticleService {
         [fn("DATE_FORMAT", col("created_at"), "%Y"), "days"]
       ],
       group: [fn("DATE_FORMAT", col("created_at"), "%Y")],
+      order: [[fn("DATE_FORMAT", col("created_at"), "%Y"), "Desc"]],
       raw: true
     })
     for (const item of data) {

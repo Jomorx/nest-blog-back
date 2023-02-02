@@ -22,7 +22,6 @@ export class ArticleController {
   @Get("getArticleList")
   @noLogin()
   async getArticleList(@Query() pageDto: PageDto) {
-    console.log(pageDto)
     return this.articleService.getArticleList(pageDto)
   }
   //根据id获取文章
@@ -55,6 +54,7 @@ export class ArticleController {
     return await this.articleService.switchIsTop(articleId, isTop)
   }
   //获取时间归档
+  @noLogin()
   @Get("getArticleTimeLine")
   async getArticleTimeLine() {
     return this.articleService.getArticleTimeLine()

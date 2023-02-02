@@ -1,7 +1,7 @@
 import { Injectable, CanActivate, ExecutionContext } from "@nestjs/common"
 import { Reflector } from "@nestjs/core"
-import { Request } from "express"
 import { JwtService } from "@nestjs/jwt"
+import { Request } from "express"
 import { jwtConfig } from "src/config/jwtConfig"
 import { AppException } from "src/filter/appException"
 const authDesc = {
