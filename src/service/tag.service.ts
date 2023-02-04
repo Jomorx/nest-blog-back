@@ -53,14 +53,11 @@ export class TagService {
     return success(null)
   }
 
-  async editTag(tagId: number, tagName: string) {
+  async editTag(tag) {
     try {
-      await this.tagModel.update(
-        { tagName },
-        {
-          where: { tagId: tagId }
-        }
-      )
+      await this.tagModel.update(tag, {
+        where: { tagId: tag.tagId }
+      })
     } catch {
       throw new AppException(500, "更新异常")
     }

@@ -17,6 +17,8 @@ export class Tag extends Model<Tag> {
   tagId: number
   @Column({ field: "tag_name" })
   tagName: string
+  @Column({ field: "tag_color" })
+  tagColor: string
   @Column({ field: "created_at" })
   createdAt: Date
   @Column({ field: "updated_at" })

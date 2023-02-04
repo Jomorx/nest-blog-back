@@ -2,14 +2,15 @@ import { Body, Controller, Get, UseGuards, Post, Query } from "@nestjs/common"
 import { PageDto } from "src/dto/pageDto"
 import { noLogin } from "src/guard/auth"
 import { AuthGuard } from "src/guard/authGuard"
+import { Tag } from "src/model"
 import { TagService } from "src/service/tag.service"
 
 @Controller("tag")
-@UseGuards(AuthGuard)
+// @UseGuards(AuthGuard)
 export class TagController {
   constructor(private readonly tagService: TagService) {}
   @Get("getTagList")
-  @noLogin()
+  // @noLogin()
   async getTagList(@Query() PageDto: PageDto) {
     return await this.tagService.getTagList(PageDto)
   }
@@ -23,8 +24,9 @@ export class TagController {
     return await this.tagService.deleteTagList(tagList)
   }
   @Post("editTag")
-  async editTag(@Body("tagId") tagId, @Body("tagName") tagName) {
-    console.log(tagId, tagName)
-    return await this.tagService.editTag(tagId, tagName)
+  async editTag(@Body() tag) {
+    console.log(tag)
+
+    return await this.tagService.editTag(tag)
   }
 }
