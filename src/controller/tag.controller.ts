@@ -6,11 +6,11 @@ import { Tag } from "src/model"
 import { TagService } from "src/service/tag.service"
 
 @Controller("tag")
-// @UseGuards(AuthGuard)
+@UseGuards(AuthGuard)
 export class TagController {
   constructor(private readonly tagService: TagService) {}
   @Get("getTagList")
-  // @noLogin()
+  @noLogin()
   async getTagList(@Query() PageDto: PageDto) {
     return await this.tagService.getTagList(PageDto)
   }
@@ -25,8 +25,6 @@ export class TagController {
   }
   @Post("editTag")
   async editTag(@Body() tag) {
-    console.log(tag)
-
     return await this.tagService.editTag(tag)
   }
 }

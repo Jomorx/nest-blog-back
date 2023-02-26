@@ -64,4 +64,10 @@ export class ArticleController {
   async viewArticle(@Param("id") id: number) {
     return this.articleService.viewArticle(id)
   }
+
+  @noLogin()
+  @Get("getArticleByKeyword")
+  async getArticleByKeyword(@Query("keyword") keyword: string) {
+    return this.articleService.getArticleByKeyword(keyword)
+  }
 }

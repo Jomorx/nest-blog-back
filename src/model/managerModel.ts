@@ -15,6 +15,10 @@ export class Manager extends Model<Manager> {
   account: string
   @Column
   password: string
+  @Column
+  nickname: string
+  @Column({ field: "group_id" })
+  groupId: string
   @Column({ field: "created_at" })
   createdAt: Date
   @Column({ field: "updated_at" })

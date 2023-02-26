@@ -23,7 +23,6 @@ export class LogService {
         limit: pageDto.pageSize,
         offset: (pageDto.currentPage - 1) * pageDto.pageSize
       })
-      console.log(res)
     }
     return success(res)
   }

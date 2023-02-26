@@ -29,7 +29,6 @@ export class FriendChainService {
   }
 
   async deleteFriendChainList(friendChainList: number[]) {
-    console.log(friendChainList)
     for (const item of friendChainList) {
       await this.friendChainModel.destroy({ where: { friendChainId: item } })
     }

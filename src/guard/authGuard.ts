@@ -36,7 +36,6 @@ export class AuthGuard implements CanActivate {
     // ): boolean | Promise<boolean> | Observable<boolean> {
   ): boolean {
     const req = context.switchToHttp().getRequest()
-    console.log("经过了AuthGuard")
     const { isLogin, isAdmin } = authDesc
     return (
       isLogin(this.reflector, context, req) && isAdmin(this.reflector, context)

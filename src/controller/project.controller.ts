@@ -19,7 +19,6 @@ export class ProjectController {
   @noLogin()
   @Get("getProjectList")
   async getProjectList(@Query() pageDto: PageDto) {
-    console.log(pageDto)
     return this.projectService.getProjectList(pageDto)
   }
   @noLogin()

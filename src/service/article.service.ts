@@ -49,7 +49,7 @@ export class ArticleService {
       include: [
         {
           model: Tag,
-          attributes: ["tagId", "tagName"]
+          attributes: ["tagId", "tagName", "tagColor"]
         },
         {
           model: Category,
@@ -73,7 +73,7 @@ export class ArticleService {
       include: [
         {
           model: Tag,
-          attributes: ["tagId", "tagName"]
+          attributes: ["tagId", "tagName", "tagColor"]
         },
         {
           model: Category,
@@ -136,5 +136,20 @@ export class ArticleService {
       { where: { articleId: id } }
     )
     return success(null, "访问成功")
+  }
+  async getArticleByKeyword(keyword: string) {
+    const res = await this.articleModel.findAll({
+      where: {
+        [Op.or]: [
+          { articleTitle: { [Op.like]: `%${keyword}%` } },
+          { articleDescription: { [Op.like]: `%${keyword}%` } }
+        ]
+      },
+      attributes: [
+        ["article_id", "value"],
+        ["article_title", "label"]
+      ]
+    })
+    return success(res)
   }
 }
